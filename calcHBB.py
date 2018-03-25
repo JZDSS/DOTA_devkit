@@ -22,10 +22,14 @@ def main(args):
                 ys = [int(n) for n in line[1:8:2]]
                 cls = line[-2:]
                 cls[0] = cls[0] + ' '
-                xmin = min(xs)
-                xmax = max(xs)
-                ymin = min(ys)
-                ymax = max(ys)
+                # xmin = min(xs)
+                # xmax = max(xs)
+                # ymin = min(ys)
+                # ymax = max(ys)
+                xmin = int(float(line[0]))
+                xmax = int(float(line[4]))
+                ymin = int(float(line[1]))
+                ymax = int(float(line[5]))
                 loc = ['%d %d %d %d ' % (xmin, ymin, xmax, ymax)]
                 line = ''.join(loc + cls)
                 fout.write(line)
