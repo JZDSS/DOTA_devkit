@@ -73,7 +73,7 @@ class DOTA:
         :return:
         """
         img = self.loadImgs(imgId)[0]
-        plt.imshow(img)
+        plt.imshow(img, cmap="gray")
         plt.axis('off')
 
         ax = plt.gca()
@@ -96,6 +96,8 @@ class DOTA:
         ax.add_collection(p)
         p = PatchCollection(circles, facecolors='red')
         ax.add_collection(p)
+        plt.show()
+
     def loadImgs(self, imgids=[]):
         """
         :param imgids: integer ids specifying img
@@ -108,14 +110,15 @@ class DOTA:
         for imgid in imgids:
             filename = os.path.join(self.imagepath, imgid + '.png')
             print('filename:', filename)
-            img = cv2.imread(filename)
+            # img = cv2.imread(filename)
+            img = plt.imread(filename)
             imgs.append(img)
         return imgs
 
-# if __name__ == '__main__':
-#     examplesplit = DOTA('examplesplit')
-#     imgids = examplesplit.getImgIds(catNms=['plane'])
-#     img = examplesplit.loadImgs(imgids)
-#     for imgid in imgids:
-#         anns = examplesplit.loadAnns(imgId=imgid)
-#         examplesplit.showAnns(anns, imgid, 2)
+if __name__ == '__main__':
+    examplesplit = DOTA('example')
+    imgids = examplesplit.getImgIds(catNms=['plane'])
+    img = examplesplit.loadImgs(imgids)
+    for imgid in imgids:
+        anns = examplesplit.loadAnns(imgId=imgid)
+        examplesplit.showAnns(anns, imgid, 2)
