@@ -29,17 +29,30 @@ def main(args):
                 xmax = max(xs)
                 ymin = min(ys)
                 ymax = max(ys)
-                vol = (ymax - ymin) * (xmax - xmin)
-                statistics[cls].append(vol)
+                area = (ymax - ymin) * (xmax - xmin)
+                statistics[cls].append(area)
                 line = fin.readline()
                 # xmin, ymin, xmax, ymax
+    t = []
     for k in statistics.keys():
-        plt.hist(statistics[k], bins=100)
+        curr = statistics[k]
+        t += curr
+        plt.hist(curr, bins=100)
         axis = plt.gca()
         axis.set_title(k)
-        # plt.show()
+        axis.set_xlabel('area')
+        axis.set_ylabel('number')
         plt.savefig(os.path.join(output_dir, k + '.png'))
         plt.close()
+
+    plt.hist(t, bins=100)
+    axis = plt.gca()
+    axis.set_title('all')
+    axis.set_xlabel('area')
+    axis.set_ylabel('number')
+    plt.savefig(os.path.join(output_dir, 'all.png'))
+    plt.close()
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Calculate HBB from OBB")
     parser.add_argument('--input_dir', '-i', default='/home/yqi/Desktop/train/labelTxt', help='OBB annotation direction')
