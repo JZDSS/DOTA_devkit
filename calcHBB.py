@@ -5,7 +5,7 @@ import argparse
 def main(args):
     input_dir = args.input_dir
     output_dir = args.output_dir
-    if not os._exists(output_dir):
+    if not os.path.exists(output_dir):
         os.mkdir(output_dir)
     for name in os.listdir(input_dir):
         i = os.path.join(input_dir, name)
